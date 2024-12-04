@@ -1,0 +1,36 @@
+---
+title: "prueba2"
+author: "Marina"
+format: 
+  revealjs:
+    embed-resources: true
+editor: visual
+execute: 
+  echo: true
+---
+
+---
+
+## Resumen de los datos
+```{r}
+library(tidyverse)
+datos <- starwars |> 
+  filter(sex %in% c("female", "male", "hermaphroditic"))
+resumen <- datos |> count(sex)
+```
+
+
+---
+
+## Gráfico
+```{r}
+#| code-fold: true
+
+gg<-
+  ggplot(resumen) +
+  geom_col(aes(x = sex, y = n, fill = sex), alpha = 0.6) +
+  ggthemes::scale_fill_colorblind() +
+  theme_minimal()
+plotly::ggplotly(gg)
+```
+
